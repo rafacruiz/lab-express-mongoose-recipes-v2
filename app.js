@@ -68,6 +68,16 @@ app.get('/recipes', async (req, res) => {
 
 //  Iteration 5 - Get a Single Recipe
 //  GET  /recipes/:id route
+app.get('/recipes/:id', async (req, res) => {
+
+    const recipe = await recipeModel.findById(req.params.id);
+
+    if (!recipe) {
+        res.status(500).json({error: 'Internal server error'});
+    }
+
+    res.status(200).json(recipe);
+});
 
 
 //  Iteration 6 - Update a Single Recipe
