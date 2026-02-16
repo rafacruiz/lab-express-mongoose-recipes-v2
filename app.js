@@ -82,6 +82,16 @@ app.get('/recipes/:id', async (req, res) => {
 
 //  Iteration 6 - Update a Single Recipe
 //  PUT  /recipes/:id route
+app.put('/recipes/:id', async (req, res) => {
+    
+    const recipe = await recipeModel.findByIdAndUpdate(req.params.id, req.body, { new: true});
+
+    if (!recipe) {
+        res.status(500).json({error: 'Internal server error'});
+    }
+
+    res.status(200).json(recipe);
+});
 
 
 //  Iteration 7 - Delete a Single Recipe
