@@ -33,9 +33,23 @@ app.get('/', (req, res) => {
 //  POST  /recipes route
 app.post('/recipes', async (req, res) => {
     
-    const recipes = await 
+    const recipes = await recipeModel.create({
+        title: req.body.title,
+        instructions: req.body.instructions,
+        level: req.body.level,
+        ingredients: req.body.ingredients,
+        image: req.body.image,
+        duration: req.body.duration,
+        isArchived: req.body.isArchived,
+        created: req.body.created
+    });
 
-    req.status(201).json(recipes);
+    if (!recipes) {
+        res.status(500).json({error: 'Internal server error'});
+        return;
+    }
+
+    res.status(201).json(recipes);
 });
 
 //  Iteration 4 - Get All Recipes
