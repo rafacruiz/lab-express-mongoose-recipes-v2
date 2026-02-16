@@ -54,7 +54,17 @@ app.post('/recipes', async (req, res) => {
 
 //  Iteration 4 - Get All Recipes
 //  GET  /recipes route
+app.get('/recipes', async (req, res) => {
 
+    const recipes = await recipeModel.find();
+
+    if (!recipes) {
+        res.status(500).json({error: 'Internal server error'});
+        return;
+    }
+
+    res.status(200).json(recipes);
+});
 
 //  Iteration 5 - Get a Single Recipe
 //  GET  /recipes/:id route
