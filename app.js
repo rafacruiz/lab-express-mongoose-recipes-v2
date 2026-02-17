@@ -96,6 +96,16 @@ app.put('/recipes/:id', async (req, res) => {
 
 //  Iteration 7 - Delete a Single Recipe
 //  DELETE  /recipes/:id route
+app.delete('/recipes/:id', async (req, res) => {
+
+    const recipe = await recipeModel.findByIdAndDelete(req.params.id);
+
+    if (!recipe) {
+        res.status(500).json({error: 'Internal error server'});
+    }
+
+    res.status(204).send();
+});
 
 
 
